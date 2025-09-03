@@ -4,11 +4,11 @@ import com.chslcompany.estudos.MyPreferences
 
 class ActiveUseCase(private val myPreferences: MyPreferences) {
 
-    suspend fun saveProductRendaFixa(rendaFixaActive: RendaFixaActive) {
+    fun saveProductRendaFixa(rendaFixaActive: RendaFixaActive) {
         myPreferences.upsertRendaFixaItem(rendaFixaActive)
     }
 
-    suspend fun saveProductFundo(fundoActive: FundoActive) {
+    fun saveProductFundo(fundoActive: FundoActive) {
         myPreferences.upsertFundoItem(fundoActive)
     }
 
@@ -16,7 +16,7 @@ class ActiveUseCase(private val myPreferences: MyPreferences) {
         return myPreferences.getActiveProductList()
     }
 
-    suspend fun removeAll() {
+    fun removeAll() {
         myPreferences.removeAll()
     }
 }

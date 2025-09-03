@@ -17,15 +17,13 @@ class MyPreferences(context: Context) {
 
     private fun updateSingleton(
         transform: (ActiveProduct) -> ActiveProduct
-    ): ChangeType {
+    ) {
         val list = getActiveProductList() ?: emptyList()
         val before = list.firstOrNull()
-        val created = before == null
         val after = transform(before ?: ActiveProduct())
         val out = listOf(after)
 
         saveActiveProduct(out)
-        return if (created) ChangeType.ADDED else ChangeType.UPDATED
     }
 
     fun saveActiveProduct(items: List<ActiveProduct>) {
@@ -47,7 +45,7 @@ class MyPreferences(context: Context) {
 
     fun upsertRendaFixaItem(
         item: RendaFixaActive
-    ): ChangeType = updateSingleton { inv ->
+    ) = updateSingleton { inv ->
         val exists = inv.rendaFixaList.any { it.id == item.id }
         val newList = if (exists) {
             inv.rendaFixaList.map { if (it.id == item.id) item else it }
@@ -59,7 +57,7 @@ class MyPreferences(context: Context) {
 
     fun upsertFundoItem(
         item: FundoActive
-    ): ChangeType = updateSingleton { inv ->
+    ) = updateSingleton { inv ->
         val exists = inv.fundoList.any { it.id == item.id }
         val newList = if (exists) {
             inv.fundoList.map { if (it.id == item.id) item else it }
@@ -69,7 +67,7 @@ class MyPreferences(context: Context) {
         inv.copy(fundoList = newList)
     }
 
-    fun removeAll(): ChangeType = updateSingleton { inv ->
+    fun removeAll() = updateSingleton { inv ->
         inv.copy(rendaFixaList = emptyList(), fundoList = emptyList())
     }
 
@@ -80,5 +78,4 @@ class MyPreferences(context: Context) {
         const val PREF_NAME = "MyPrefs"
     }
 
-    enum class ChangeType { ADDED, UPDATED }
 }
