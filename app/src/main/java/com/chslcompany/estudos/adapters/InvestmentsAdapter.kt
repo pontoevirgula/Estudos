@@ -1,4 +1,4 @@
-package com.chslcompany.estudos
+package com.chslcompany.estudos.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.chslcompany.estudos.status.InvestmentsStatus
+import com.chslcompany.estudos.R
 
 
 class InvestmentsAdapter(private var list: List<InvestmentsStatus>) :

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".OrderingFragment">
+    tools:context=".status.OrderingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarToolbar"

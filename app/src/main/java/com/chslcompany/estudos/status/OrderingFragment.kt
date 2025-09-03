@@ -1,4 +1,4 @@
-package com.chslcompany.estudos
+package com.chslcompany.estudos.status
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import com.chslcompany.estudos.R
 
 
 class OrderingFragment : Fragment() {

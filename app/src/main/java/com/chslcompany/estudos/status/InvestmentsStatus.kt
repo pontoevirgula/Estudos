@@ -1,4 +1,4 @@
-package com.chslcompany.estudos
+package com.chslcompany.estudos.status
 
 data class InvestmentsStatus(
     var id: Int = 0,
