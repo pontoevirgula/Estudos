@@ -82,6 +82,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/llButtons"
+                tools:listitem="@layout/item_active"
                 android:id="@+id/rvActives"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />

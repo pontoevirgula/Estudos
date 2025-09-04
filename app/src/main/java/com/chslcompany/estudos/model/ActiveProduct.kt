@@ -1,4 +1,4 @@
-package com.chslcompany.estudos.ativos
+package com.chslcompany.estudos.model
 
 import java.util.UUID
 

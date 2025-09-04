@@ -1,36 +1,34 @@
-package com.chslcompany.estudos.ativos
+package com.chslcompany.estudos.ativos.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chslcompany.estudos.ADDED_MODE_KEY
-import com.chslcompany.estudos.MyPreferences
 import com.chslcompany.estudos.R
 import com.chslcompany.estudos.RESULT_SUCCESS
 import com.chslcompany.estudos.adapters.ActiveAdapter
 import com.chslcompany.estudos.adapters.Actives
+import com.chslcompany.estudos.ativos.util.BaseFragment
+import com.chslcompany.estudos.ativos.viewmodel.ActiveViewModel
 import kotlinx.coroutines.launch
 
-class SendInvestmentFragment : Fragment() {
+class SendInvestmentFragment : BaseFragment() {
 
     private lateinit var myAdapter: ActiveAdapter
     private lateinit var tvCountValue: TextView
     private lateinit var btnContinue: Button
     private var activeSize: Int = 0
-    private lateinit var myPreferences: MyPreferences
-    private lateinit var useCase: ActiveUseCase
-    private lateinit var viewModel: ActiveViewModel
+    private val viewModel: ActiveViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +39,6 @@ class SendInvestmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val applicationContext: Context = requireContext().applicationContext
-        myPreferences = MyPreferences(applicationContext)
-        useCase = ActiveUseCase(myPreferences)
-        viewModel = ActiveViewModel(useCase)
 
         btnContinue = view.findViewById<Button>(R.id.btnContinue)
         val btnCancel = view.findViewById<Button>(R.id.btnCancel)

@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.chslcompany.estudos.ativos.SendInvestmentFragment
+import com.chslcompany.estudos.ativos.fragments.SendInvestmentFragment
 import com.chslcompany.estudos.status.OrderingFragment
 import com.chslcompany.estudos.status.StatusFragment
 

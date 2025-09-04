@@ -2,11 +2,11 @@ package com.chslcompany.estudos
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.chslcompany.estudos.ativos.RendaFixaActive
+import com.chslcompany.estudos.model.RendaFixaActive
 import com.google.gson.Gson
 import androidx.core.content.edit
-import com.chslcompany.estudos.ativos.ActiveProduct
-import com.chslcompany.estudos.ativos.FundoActive
+import com.chslcompany.estudos.model.ActiveProduct
+import com.chslcompany.estudos.model.FundoActive
 import com.google.gson.reflect.TypeToken
 
 class MyPreferences(context: Context) {

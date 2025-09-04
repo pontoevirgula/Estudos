@@ -1,7 +1,10 @@
-package com.chslcompany.estudos.ativos
+package com.chslcompany.estudos.ativos.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chslcompany.estudos.ativos.usecase.ActiveUseCase
+import com.chslcompany.estudos.model.FundoActive
+import com.chslcompany.estudos.model.RendaFixaActive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

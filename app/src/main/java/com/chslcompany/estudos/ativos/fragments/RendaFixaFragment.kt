@@ -1,10 +1,8 @@
-package com.chslcompany.estudos.ativos
+package com.chslcompany.estudos.ativos.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,38 +10,38 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.chslcompany.estudos.ADDED_MODE_KEY
 import com.chslcompany.estudos.EDITED_MODE_KEY
-import com.chslcompany.estudos.MyPreferences
 import com.chslcompany.estudos.R
 import com.chslcompany.estudos.RESULT_SUCCESS
+import com.chslcompany.estudos.ativos.util.BaseFragment
+import com.chslcompany.estudos.ativos.viewmodel.ActiveViewModel
+import com.chslcompany.estudos.model.RendaFixaActive
 
-class FundoFragment : Fragment() {
+class RendaFixaFragment : BaseFragment() {
 
-    private lateinit var myPreferences: MyPreferences
-    private lateinit var useCase: ActiveUseCase
-    private lateinit var viewModel: ActiveViewModel
-    private lateinit var edtFundo: EditText
-    private lateinit var edtCode: EditText
+    private lateinit var edtRendaFixa: EditText
+    private lateinit var edtQtd: EditText
     private lateinit var btnIncluir: Button
     private var isEditMode = false
+    private val viewModel: ActiveViewModel by viewModels { viewModelFactory }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fundo, container, false)
+        return inflater.inflate(R.layout.fragment_renda_fixa, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val applicationContext: Context = requireContext().applicationContext
-        myPreferences = MyPreferences(applicationContext)
-        useCase = ActiveUseCase(myPreferences)
-        viewModel = ActiveViewModel(useCase)
 
-        edtFundo = view.findViewById<EditText>(R.id.edtFundo)
-        edtCode = view.findViewById<EditText>(R.id.edtCode)
+        edtRendaFixa = view.findViewById<EditText>(R.id.edtRendaFixa)
+        edtQtd = view.findViewById<EditText>(R.id.edtQtd)
         btnIncluir = view.findViewById<Button>(R.id.btnIncluir)
 
         setupTextWatcher()
@@ -57,20 +55,20 @@ class FundoFragment : Fragment() {
                 updateButtonState()
             }
         }
-        edtFundo.addTextChangedListener(watcher)
-        edtCode.addTextChangedListener(watcher)
+        edtRendaFixa.addTextChangedListener(watcher)
+        edtQtd.addTextChangedListener(watcher)
     }
 
     private fun updateButtonState() {
-        if (!edtFundo.text.isNullOrBlank() && !edtCode.text.isNullOrBlank()) {
+        if (!edtRendaFixa.text.isNullOrBlank() && !edtQtd.text.isNullOrBlank()) {
             btnIncluir.isEnabled = true
             btnIncluir.setOnClickListener {
                 notifyWhenAdded()
-                val fundoActive = FundoActive(
-                    name = edtFundo.text.toString(),
-                    code = edtCode.text.toString()
+                val rendaFixaActive = RendaFixaActive(
+                    name = edtRendaFixa.text.toString(),
+                    qtd = edtQtd.text.toString().toInt()
                 )
-                viewModel.saveFundo(false, fundoActive)
+                viewModel.saveRendaFixa(false, rendaFixaActive)
                 val fragment = SendInvestmentFragment()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
@@ -98,4 +96,8 @@ class FundoFragment : Fragment() {
             }
         }
     }
+
 }
+
+
+

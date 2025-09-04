@@ -1,6 +1,9 @@
-package com.chslcompany.estudos.ativos
+package com.chslcompany.estudos.ativos.usecase
 
 import com.chslcompany.estudos.MyPreferences
+import com.chslcompany.estudos.model.ActiveProduct
+import com.chslcompany.estudos.model.FundoActive
+import com.chslcompany.estudos.model.RendaFixaActive
 
 class ActiveUseCase(private val myPreferences: MyPreferences) {
 
