@@ -23,6 +23,14 @@ class ActiveUseCase(private val myPreferences: MyPreferences) {
         myPreferences.removeAll()
     }
 
+    fun removeRendaFixaItem(id : String) {
+        myPreferences.removeRendaFixaItem(id)
+    }
+
+    fun removeFundoItem(id : String) {
+        myPreferences.removeFundoItem(id)
+    }
+
     fun saveProductRendaFixaSelected(rendaFixaActive: RendaFixaActive) {
         myPreferences.saveRendaFixaSelected(rendaFixaActive)
     }

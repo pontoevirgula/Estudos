@@ -59,6 +59,14 @@ class ActiveViewModel( private val useCase : ActiveUseCase) : ViewModel() {
         }
     }
 
+    fun removeRendaFixaItem(id : String) {
+        useCase.removeRendaFixaItem(id)
+    }
+
+    fun removeFundoItem(id : String) {
+        useCase.removeFundoItem(id)
+    }
+
     suspend fun getAllInvestmentsSaved() : List<ActiveProduct>?{
         return withContext(Dispatchers.IO) {
             useCase.getActiveProducts()

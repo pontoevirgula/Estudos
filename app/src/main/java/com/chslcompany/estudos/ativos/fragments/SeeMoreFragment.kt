@@ -46,6 +46,10 @@ class SeeMoreFragment : BaseFragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 list = viewModel.getAllInvestmentsSaved() ?: emptyList()
                 activesIncluded.text = viewModel.getInvestmentCount().toString()
+                if (viewModel.getInvestmentCount() == 0){
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                    return@repeatOnLifecycle
+                }
                 val rvActives = view?.findViewById<RecyclerView>(R.id.rvActives)
                 rvActives?.layoutManager = LinearLayoutManager(requireContext())
                 adapter = SeeMoreAdapter()
@@ -82,6 +86,19 @@ class SeeMoreFragment : BaseFragment() {
                         }
                     }
                 }
+
+                adapter.onDeleteCallback = { row ->
+                    when(row){
+                        is RendaRow -> {
+                            viewModel.removeRendaFixaItem(row.data.id)
+                        }
+                        is SeeMoreAdapter.FundsRow -> {
+                            viewModel.removeFundoItem(row.data.id)
+                        }
+                    }
+                    showScreen()
+                }
+
             }
         }
 

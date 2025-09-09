@@ -101,6 +101,15 @@ class MyPreferences(context: Context) {
         inv.copy(rendaFixaList = emptyList(), fundoList = emptyList())
     }
 
+    fun removeRendaFixaItem(id : String) = updateSingleton { inv ->
+        inv.copy(rendaFixaList = inv.rendaFixaList.filterNot { it.id == id })
+    }
+
+    fun removeFundoItem(id : String) = updateSingleton { inv ->
+        inv.copy(fundoList = inv.fundoList.filterNot { it.id == id })
+    }
+
+
 
     companion object {
         const val ACTIVE_PRODUCT_LIST = "ACTIVE_PRODUCT_LIST"
