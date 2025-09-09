@@ -1,6 +1,6 @@
 package com.chslcompany.estudos.ativos.usecase
 
-import com.chslcompany.estudos.MyPreferences
+import com.chslcompany.estudos.ativos.util.MyPreferences
 import com.chslcompany.estudos.model.ActiveProduct
 import com.chslcompany.estudos.model.FundoActive
 import com.chslcompany.estudos.model.RendaFixaActive
@@ -22,4 +22,21 @@ class ActiveUseCase(private val myPreferences: MyPreferences) {
     fun removeAll() {
         myPreferences.removeAll()
     }
+
+    fun saveProductRendaFixaSelected(rendaFixaActive: RendaFixaActive) {
+        myPreferences.saveRendaFixaSelected(rendaFixaActive)
+    }
+
+    fun getRendaFixaSelected(): RendaFixaActive? {
+        return myPreferences.getRendaFixaSelected()
+    }
+
+    fun getFundsSelected(): FundoActive? {
+        return myPreferences.getFundsSelected()
+    }
+
+    fun saveProductFundsSelected(fundoActive: FundoActive) {
+        myPreferences.saveFundsSelected(fundoActive)
+    }
+
 }

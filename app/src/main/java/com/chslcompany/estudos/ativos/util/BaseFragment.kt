@@ -1,7 +1,6 @@
 package com.chslcompany.estudos.ativos.util
 
 import androidx.fragment.app.Fragment
-import com.chslcompany.estudos.MyPreferences
 import com.chslcompany.estudos.ativos.usecase.ActiveUseCase
 
 open class BaseFragment : Fragment() {

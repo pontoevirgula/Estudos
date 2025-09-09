@@ -27,6 +27,7 @@ class SendInvestmentFragment : BaseFragment() {
     private lateinit var myAdapter: ActiveAdapter
     private lateinit var tvCountValue: TextView
     private lateinit var btnContinue: Button
+    private lateinit var btnSeeMore: Button
     private var activeSize: Int = 0
     private val viewModel: ActiveViewModel by viewModels { viewModelFactory }
 
@@ -44,9 +45,25 @@ class SendInvestmentFragment : BaseFragment() {
         val btnCancel = view.findViewById<Button>(R.id.btnCancel)
         val rvActives = view.findViewById<RecyclerView>(R.id.rvActives)
         tvCountValue = view.findViewById<TextView>(R.id.tvCountValue)
+        btnSeeMore = view.findViewById<Button>(R.id.btnSeeMore)
 
         setupListeners()
         setupAdapter(rvActives)
+
+        btnSeeMore.setOnClickListener {
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    activeSize = viewModel.getInvestmentCount() ?: 0
+                    if (activeSize > 0) {
+                        val fragment = SeeMoreFragment()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                }
+            }
+        }
 
         btnContinue.setOnClickListener {
 

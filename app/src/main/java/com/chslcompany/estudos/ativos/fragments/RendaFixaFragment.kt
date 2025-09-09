@@ -11,9 +11,9 @@ import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.chslcompany.estudos.ADDED_MODE_KEY
 import com.chslcompany.estudos.EDITED_MODE_KEY
+import com.chslcompany.estudos.EDIT_BUNDLE_KEY
 import com.chslcompany.estudos.R
 import com.chslcompany.estudos.RESULT_SUCCESS
 import com.chslcompany.estudos.ativos.util.BaseFragment
@@ -43,8 +43,17 @@ class RendaFixaFragment : BaseFragment() {
         edtRendaFixa = view.findViewById<EditText>(R.id.edtRendaFixa)
         edtQtd = view.findViewById<EditText>(R.id.edtQtd)
         btnIncluir = view.findViewById<Button>(R.id.btnIncluir)
-
         setupTextWatcher()
+
+        arguments?.let {
+            isEditMode = it.getBoolean(EDIT_BUNDLE_KEY)
+        }
+
+        if (isEditMode) {
+            val rendaFixaActive = viewModel.getRendaFixaSelected()
+            edtRendaFixa.setText(rendaFixaActive?.name)
+            edtQtd.setText(rendaFixaActive?.qtd.toString())
+        }
     }
 
     private fun setupTextWatcher() {
@@ -68,7 +77,7 @@ class RendaFixaFragment : BaseFragment() {
                     name = edtRendaFixa.text.toString(),
                     qtd = edtQtd.text.toString().toInt()
                 )
-                viewModel.saveRendaFixa(false, rendaFixaActive)
+                viewModel.saveRendaFixa(isEditMode, rendaFixaActive)
                 val fragment = SendInvestmentFragment()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)

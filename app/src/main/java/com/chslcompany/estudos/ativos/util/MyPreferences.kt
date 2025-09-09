@@ -1,12 +1,12 @@
-package com.chslcompany.estudos
+package com.chslcompany.estudos.ativos.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.chslcompany.estudos.model.RendaFixaActive
-import com.google.gson.Gson
 import androidx.core.content.edit
 import com.chslcompany.estudos.model.ActiveProduct
 import com.chslcompany.estudos.model.FundoActive
+import com.chslcompany.estudos.model.RendaFixaActive
+import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class MyPreferences(context: Context) {
@@ -30,6 +30,36 @@ class MyPreferences(context: Context) {
         sharedPreferences.edit {
             val jsonString = gson.toJson(items)
             putString(ACTIVE_PRODUCT_LIST, jsonString)
+        }
+    }
+
+    fun saveRendaFixaSelected(rendaFixaActive: RendaFixaActive) {
+        sharedPreferences.edit {
+            val jsonString = gson.toJson(rendaFixaActive)
+            putString(ACTIVE_RENDA_SELECT, jsonString)
+        }
+    }
+
+    fun getRendaFixaSelected(): RendaFixaActive? {
+        val jsonString = sharedPreferences.getString(ACTIVE_RENDA_SELECT, null)
+        if (jsonString == null) {
+            return null
+        }
+        return gson.fromJson(jsonString, RendaFixaActive::class.java)
+    }
+
+    fun getFundsSelected(): FundoActive? {
+        val jsonString = sharedPreferences.getString(ACTIVE_FUND_SELECT, null)
+        if (jsonString == null) {
+            return null
+        }
+        return gson.fromJson(jsonString, FundoActive::class.java)
+    }
+
+    fun saveFundsSelected(fundoActive: FundoActive) {
+        sharedPreferences.edit {
+            val jsonString = gson.toJson(fundoActive)
+            putString(ACTIVE_FUND_SELECT, jsonString)
         }
     }
 
@@ -75,6 +105,7 @@ class MyPreferences(context: Context) {
     companion object {
         const val ACTIVE_PRODUCT_LIST = "ACTIVE_PRODUCT_LIST"
         const val ACTIVE_RENDA_SELECT = "ACTIVE_RENDA_SELECT"
+        const val ACTIVE_FUND_SELECT = "ACTIVE_FUND_SELECT"
         const val PREF_NAME = "MyPrefs"
     }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.chslcompany.estudos.ADDED_MODE_KEY
 import com.chslcompany.estudos.EDITED_MODE_KEY
+import com.chslcompany.estudos.EDIT_BUNDLE_KEY
 import com.chslcompany.estudos.R
 import com.chslcompany.estudos.RESULT_SUCCESS
 import com.chslcompany.estudos.ativos.util.BaseFragment
@@ -42,6 +43,16 @@ class FundoFragment : BaseFragment() {
         btnIncluir = view.findViewById<Button>(R.id.btnIncluir)
 
         setupTextWatcher()
+
+        arguments?.let {
+            isEditMode = it.getBoolean(EDIT_BUNDLE_KEY)
+        }
+
+        if (isEditMode) {
+            val fundoActive = viewModel.getFundsSelected()
+            edtFundo.setText(fundoActive?.name)
+            edtCode.setText(fundoActive?.code)
+        }
     }
 
     private fun setupTextWatcher() {
@@ -65,7 +76,7 @@ class FundoFragment : BaseFragment() {
                     name = edtFundo.text.toString(),
                     code = edtCode.text.toString()
                 )
-                viewModel.saveFundo(false, fundoActive)
+                viewModel.saveFundo(isEditMode, fundoActive)
                 val fragment = SendInvestmentFragment()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
